@@ -13,10 +13,10 @@ action "Test" {
   args = "test/*.bats"
 }
 
-action "Integration Test" {
-  uses = "./"
-  args = "version"
-}
+# action "Integration Test" {
+#   uses = "./"
+#   args = "version"
+# }
 
 action "Docker Lint" {
   uses = "docker://replicated/dockerfilelint"
@@ -24,7 +24,8 @@ action "Docker Lint" {
 }
 
 action "Build" {
-  needs = ["Shell Lint", "Test", "Integration Test", "Docker Lint"]
+  # needs = ["Shell Lint", "Test", "Integration Test", "Docker Lint"]
+  needs = ["Shell Lint", "Test", "Docker Lint"]
   uses = "actions/docker/cli@master"
   args = "build -t yarn-actions ."
 }
