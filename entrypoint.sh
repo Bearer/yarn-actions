@@ -3,7 +3,6 @@
 set -e
 
 if [ -n "$NPM_AUTH_TOKEN" ]; then
- echo "NPM_TOKEN proviided"
   # Respect NPM_CONFIG_USERCONFIG if it is provided, default to $HOME/.npmrc
   NPM_CONFIG_USERCONFIG="${NPM_CONFIG_USERCONFIG-"$HOME/.npmrc"}"
   NPM_REGISTRY_URL="${NPM_REGISTRY_URL-registry.npmjs.org}"
@@ -12,5 +11,6 @@ if [ -n "$NPM_AUTH_TOKEN" ]; then
   printf "//%s/:_authToken=%s\\nregistry=%s" "$NPM_REGISTRY_URL" "$NPM_AUTH_TOKEN" "$NPM_REGISTRY_URL" > "$NPM_CONFIG_USERCONFIG"
   chmod 0600 "$NPM_CONFIG_USERCONFIG"
 fi
-
+# need to delete it for private packages
+sh -c "npm config delete registry"
 sh -c "yarn $*"
