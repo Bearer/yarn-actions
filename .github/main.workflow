@@ -26,13 +26,13 @@ action "Docker Lint" {
 action "Build" {
   needs = ["Shell Lint", "Test", "Integration Test", "Docker Lint"]
   uses = "actions/docker/cli@master"
-  args = "build -t npm ."
+  args = "build -t yarn-actions ."
 }
 
 action "Docker Tag" {
   needs = ["Build"]
   uses = "actions/docker/tag@master"
-  args = "npm github/npm --no-latest"
+  args = "yarn-actions bearerantoine/yarn-actions --no-latest"
 }
 
 action "Publish Filter" {
@@ -50,5 +50,5 @@ action "Docker Login" {
 action "Docker Publish" {
   needs = ["Docker Tag", "Docker Login"]
   uses = "actions/docker/cli@master"
-  args = "push github/npm"
+  args = "push bearerantoine/yarn-actions"
 }
