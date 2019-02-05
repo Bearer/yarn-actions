@@ -3,6 +3,7 @@
 set -e
 
 if [ -n "$NPM_AUTH_TOKEN" ]; then
+ echo "NPM_TOKEN proviided"
   # Respect NPM_CONFIG_USERCONFIG if it is provided, default to $HOME/.npmrc
   NPM_CONFIG_USERCONFIG="${NPM_CONFIG_USERCONFIG-"$HOME/.npmrc"}"
   NPM_REGISTRY_URL="${NPM_REGISTRY_URL-registry.npmjs.org}"
